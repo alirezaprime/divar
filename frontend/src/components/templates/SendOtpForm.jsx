@@ -1,10 +1,38 @@
+// import { Toaster, ToastBar } from "react-hot-toast";
+// import toast, { Toaster, ToastBar } from "react-hot-toast";
+import toast, { Toaster, ToastBar } from "react-hot-toast";
+
+import { sendOtp } from "../../services/auth";
+
 function SendOtpForm({ setStep, mobile, setMobile, setCode }) {
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(event);
+    console.log(mobile);
+
+    if (mobile.length !== 11) return;
+
+    const { response, error } = await sendOtp(mobile);
+
+    if (response) setStep(2);
+    if (error) toast("مشکلی وجود دارد ");
+
+    //  console.log(error.response.data.message);
+    console.log({ response, error });
   };
   return (
     <div>
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            border: "1px solid #04ff00",
+            padding: "16px",
+            color: "#0080ff",
+            backgroundColor: "#fff",
+          },
+        }}
+      />
+
       <form onSubmit={submitHandler}>
         <p>ورود به حساب کاربری</p>
         <span>
