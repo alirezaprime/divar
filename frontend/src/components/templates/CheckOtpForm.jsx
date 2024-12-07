@@ -1,7 +1,15 @@
+import { checkOtp } from "../../services/auth";
+
 function CheckOtpForm({ mobile, code, setCode, setStep }) {
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    console.log({ code, mobile });
+    // console.log({ code, mobile });
+    if (code.length !== 5) return;
+    const { response, error } = await checkOtp(code, mobile);
+    if (response) {
+      console.log(response);
+    }
+    if (error) toast("مشکلی وجود دارد ");
   };
   return (
     <form onSubmit={submitHandler}>
