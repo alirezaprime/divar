@@ -1,7 +1,14 @@
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+
 import { checkOtp } from "services/auth";
-import { setCookie } from "src/utils/cookie";
+import { getProfile } from "services/user";
+import { setCookie } from "utils/cookie";
 
 function CheckOtpForm({ mobile, code, setCode, setStep }) {
+  const { refetch } = useQuery(["profile"], getProfile);
+  const navigate = useNavigate();
+
   const submitHandler = async (event) => {
     event.preventDefault();
     // console.log({ code, mobile });
@@ -10,6 +17,8 @@ function CheckOtpForm({ mobile, code, setCode, setStep }) {
     const { response, error } = await checkOtp(code, mobile);
     if (response) {
       setCookie(response.data);
+      navigate("/");
+      refetch();
     }
     if (error) toast("مشکلی وجود دارد ");
   };
