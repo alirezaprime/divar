@@ -2,6 +2,8 @@
 // import toast, { Toaster, ToastBar } from "react-hot-toast";
 import toast, { Toaster, ToastBar } from "react-hot-toast";
 
+import styles from "./SendOtpForm.module.css";
+
 import { sendOtp } from "services/auth";
 
 function SendOtpForm({ setStep, mobile, setMobile, setCode }) {
@@ -33,7 +35,7 @@ function SendOtpForm({ setStep, mobile, setMobile, setCode }) {
         }}
       />
 
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className={styles.form}>
         <p>ورود به حساب کاربری</p>
         <span>
           {" "}
