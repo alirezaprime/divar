@@ -26,6 +26,9 @@
   font-size: 0.9rem;
   cursor: pointer;
 }
+.form button:disabled {
+  opacity: 0.5;
+}
 .form p {
   background-color: #a62626;
   margin-bottom: 20px;
