@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getCategory } from "services/admin";
 import Loader from "../modules/Loader";
 
+import styles from "./CategoryList.module.css";
+
 function CategoryList() {
   //   getCategory()
   //     .then((data) => console.log(data))
@@ -10,7 +12,7 @@ function CategoryList() {
   console.log({ data, isLoading });
 
   return (
-    <div>
+    <div className={styles.list}>
       {isLoading ? (
         <Loader />
       ) : (
@@ -27,4 +29,3 @@ function CategoryList() {
 }
 
 export default CategoryList;
-/////////////////////////////////////////////////////////////////////////
