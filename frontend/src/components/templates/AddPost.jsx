@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { getCategory } from "src/services/admin";
 
 import styles from "./AddPost.module.css";
+import { getCookie } from "utils/cookie";
+import axios from "axios";
 
 function AddPost() {
   const [form, setForm] = useState({
@@ -31,6 +34,29 @@ function AddPost() {
   const addHandler = (event) => {
     event.preventDefault();
     console.log(form);
+    const formData = new FormData();
+    ///////////////////////////////////////////////////
+    // formData.append("title", form["title"]);
+    // formData.append("content", form["content"]);
+    // formData.append("amount", form["amount"]);
+    // formData.append("city", form["city"]);
+    // formData.append("category", form["category"]);
+    // formData.append("images", form["images"]);
+    ///////////////////////////////////////////////////
+    for (let i in form) {
+      formData.append(i, form[i]);
+    }
+    const token = getCookie("accessToken");
+
+    axios
+      .post(`${import.meta.env.VITE_BASE_URL}post/create`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `bearer ${token}`,
+        },
+      })
+      .then((res) => toast.success(res.data.message))
+      .catch((error) => toast.error("مشکلی پیش آمده است "));
   };
 
   return (
@@ -45,7 +71,7 @@ function AddPost() {
         <textarea id="content" name="content" />
 
         <label htmlFor="amount">مبلغ</label>
-        <input type="text" id="amount" name="amount" />
+        <input type="number" id="amount" name="amount" />
 
         <label htmlFor="city">شهر</label>
         <input type="text" id="city" name="city" />
