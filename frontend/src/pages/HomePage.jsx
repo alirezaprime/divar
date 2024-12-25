@@ -1,5 +1,14 @@
+import Main from "components/templates/Main";
+import SideBar from "components/templates/SideBar";
+
 function HomePage() {
-  return <div>HomePage</div>;
+  const style = { display: "flex" };
+  return (
+    <div style={style}>
+      <SideBar />
+      <Main />
+    </div>
+  );
 }
 
 export default HomePage;

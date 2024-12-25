@@ -9,7 +9,7 @@ function PostList() {
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   const { data, isLoading } = useQuery(["my-post-list"], getPosts);
-  // console.log(data);
+  console.log(data);
   return (
     <div className={styles.list}>
       {isLoading ? (
