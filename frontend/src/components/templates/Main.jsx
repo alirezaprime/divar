@@ -1,12 +1,14 @@
 import { sp } from "utils/numbers";
+
+import styles from "./main.module.css";
 function Main({ posts }) {
   const baseURL = import.meta.env.VITE_BASE_URL;
-  // console.log(posts);
+  console.log(posts);
   return (
-    <div>
-      {posts.data.posts.map((post) => (
-        <div key={post._id}>
-          <div>
+    <div className={styles.container}>
+      {posts?.data.posts.map((post) => (
+        <div key={post._id} className={styles.card}>
+          <div className={styles.info}>
             <p>{post.options.title}</p>
             <div>
               <p>{sp(post.amount)} تومان</p>
@@ -17,6 +19,7 @@ function Main({ posts }) {
         </div>
       ))}
     </div>
+    // <div>ممد</div>
   );
 }
 
